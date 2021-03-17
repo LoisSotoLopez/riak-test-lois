@@ -1,8 +1,16 @@
 -module(test_lib).
 
--define(BUCKET, <<"Cars">>).
+-define(BUCKET, <<"MapCars">>).
 
--export([sample_mr/0]).
+-export([sample_mr/0, sample_get/0]).
+
+sample_get() ->
+  {ok, Pid} = riakc_pb_socket:start_link("127.0.0.1", 10017),
+
+  Out = riakc_pb_socket:get(Pid, ?BUCKET, <<"1">>),
+
+  riakc_pb_socket:stop(Pid),
+  Out.
 
 sample_mr() ->
   {ok, Pid} = riakc_pb_socket:start_link("127.0.0.1", 10017),
