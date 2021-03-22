@@ -28,7 +28,6 @@ sample_mr() ->
   ],
 
   Out = riakc_pb_socket:mapred_bucket(Pid, ?BUCKET, Phases),
-  ct:print(Out),
   riakc_pb_socket:stop(Pid),
   Out.
 
